@@ -6,23 +6,23 @@
 import Foundation
 
 /// 쥬스 메이커 타입
-enum TypesOfFruitJuice: String {
-    case strawberryJuice = "딸기주스"
-    case bananaJuice = "바나나주스"
-    case kiwiJuice = "키위주스"
-    case pineappleJuice = "파인애플주스"
-    case strawberryAndBananaJuice = "딸바주스"
-    case mangoJuice = "망고주스"
-    case mangoAndKiwiJuice = "망키주스"
+enum TypesOfFruitJuice {
+    case strawberryJuice
+    case bananaJuice
+    case kiwiJuice
+    case pineappleJuice
+    case strawberryAndBananaJuice
+    case mangoJuice
+    case mangoAndKiwiJuice
 }
 
 
-enum TypesOfFruit: String {
-    case strawberry = "딸기"
-    case banana = "바나나"
-    case kiwi = "키위"
-    case pineapple = "파인애플"
-    case mango = "망고"
+enum TypesOfFruit {
+    case strawberry
+    case banana
+    case kiwi
+    case pineapple
+    case mango
 }
 
 class JuiceMaker {
