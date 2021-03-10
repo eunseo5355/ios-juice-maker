@@ -19,7 +19,7 @@ struct JuiceMaker {
         for (fruit, requiredAmount) in juice.getRecipe() {
             if let fruitStock = fruits[fruit] {
                 if fruitStock.checkStock(requiredAmount) {
-                    fruitStock.subtractStoke(requiredAmount)
+                    fruitStock.subtractStock(requiredAmount)
                 } else {
                     print("재고가 모자라요.")
                     return

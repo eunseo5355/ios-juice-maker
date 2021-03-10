@@ -25,11 +25,11 @@ class Fruit {
         else { return true }
     }
     
-    func subtractStoke(_ requiredFruitAmount: Int) {
+    func subtractStock(_ requiredFruitAmount: Int) {
         stock -= requiredFruitAmount
     }
     
-    func addStoke() {
+    func addStock() {
         stock += 1
     }
 }
