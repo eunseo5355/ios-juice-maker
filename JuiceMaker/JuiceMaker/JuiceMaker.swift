@@ -16,16 +16,16 @@ struct JuiceMaker {
     ]
     
     func makeJuice(juice: JuiceTypes) {
-        for (fruit, requiredAmount) in juice.getRecipe() {
-            if let fruitStock = fruits[fruit] {
-                if fruitStock.checkStock(requiredAmount) {
-                    fruitStock.subtractStock(requiredAmount)
+        for (fruitType, requiredAmount) in juice.recipe() {
+            if let fruit = fruits[fruitType] {
+                if fruit.checkStock(requiredAmount) {
+                    fruit.subtractStock(requiredAmount)
                 } else {
                     print("재고가 모자라요.")
                     return
                 }
             }
         }
-        print("\(juice.getName()) 나왔습니다! 맛있게 드세요!")
+        print("\(juice.name()) 나왔습니다! 맛있게 드세요!")
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 enum JuiceTypes {
     case strawberryJuice, bananaJuice, kiwiJuice, pineappleJuice, strawberryBananaJuice, mangoJuice, mangoKiwiJuice
     
-    func getRecipe() -> [FruitTypes:Int] {
+    func recipe() -> [FruitTypes:Int] {
         switch self {
         case .strawberryJuice:
             return [.strawberry: 16]
@@ -29,7 +29,7 @@ enum JuiceTypes {
         }
     }
     
-    func getName() -> String {
+    func name() -> String {
         switch self {
         case .strawberryJuice:
             return "딸기쥬스"
