@@ -21,7 +21,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="44"/>
                                 <items>
                                     <navigationItem title="맛있는 쥬스를 만들어 드려요!" id="kPa-HA-pR4">
-                                        <barButtonItem key="rightBarButtonItem" title="재고 수정" id="tTZ-nB-Q5m"/>
+                                        <barButtonItem key="rightBarButtonItem" title="재고 수정" id="tTZ-nB-Q5m">
+                                            <connections>
+                                                <segue destination="PGj-au-n5R" kind="presentation" id="zGx-jo-tzB"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -254,6 +258,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-206.25" y="78.260869565217391"/>
+        </scene>
+        <!--Stock Manger View Controller-->
+        <scene sceneID="vUb-ud-eNC">
+            <objects>
+                <viewController id="PGj-au-n5R" customClass="StockMangerViewController" customModule="JuiceMaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iHQ-uZ-WpO">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QaL-6V-ZDE">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="재고 추가" id="GbS-5r-P3k">
+                                        <barButtonItem key="rightBarButtonItem" title="닫기" id="Ikm-BB-3Cv">
+                                            <connections>
+                                                <action selector="touchUpDismisButton:" destination="PGj-au-n5R" id="UMt-VU-6fT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="B6H-ig-nkA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="72m-Mt-mY7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-206" y="833"/>
         </scene>
     </scenes>
     <resources>
