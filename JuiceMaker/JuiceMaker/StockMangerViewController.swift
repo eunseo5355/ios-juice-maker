@@ -9,6 +9,9 @@ import UIKit
 
 class StockMangerViewController: UIViewController {
 
+    @IBOutlet weak var testNumber: UILabel!
+    var Number = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +22,16 @@ class StockMangerViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func addNumber(_ sender: Any) {
+        Number += 1
+        testNumber.text = String(Number)
+    }
+    
+    @IBAction func substractNumber(_ sender: Any) {
+        Number -= 1
+        testNumber.text = String(Number)
+    }
+    
     /*
     // MARK: - Navigation
 
