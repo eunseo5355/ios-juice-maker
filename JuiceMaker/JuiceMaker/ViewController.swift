@@ -10,22 +10,28 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var strawberryStock: UILabel!
     @IBOutlet weak var bananaStock: UILabel!
-    @IBOutlet weak var fineappleStock: UILabel!
+    @IBOutlet weak var pineappleStock: UILabel!
     @IBOutlet weak var kiwiStock: UILabel!
     @IBOutlet weak var mangoStock: UILabel!
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let a = JuiceMaker().fruitInformation
         
-        strawberryStock.text = String("2")
-        bananaStock.text = String("2")
-        fineappleStock.text = String("3")
-        kiwiStock.text = String("4")
-        mangoStock.text = String("5")
+        let Juice = JuiceMaker.init()
+//        print(JuiceMaker.FruitStock)
+        
+        var strawberry = FruitStock.init(.strawberry, 10)
+        var banana = FruitStock.init(.banana, 10)
+        var pineapple = FruitStock.init(.pineapple, 10)
+        var kiwi = FruitStock.init(.kiwi, 10)
+        var mango = FruitStock.init(.mango, 10)
+        
+        strawberryStock.text = String(strawberry.stock)
+        bananaStock.text = String(banana.stock)
+        pineappleStock.text = String(pineapple.stock)
+        kiwiStock.text = String(kiwi.stock)
+        mangoStock.text = String(mango.stock)
     }
 
     @IBAction func strawberryJuice(_ sender: Any) {
@@ -35,6 +41,8 @@ class ViewController: UIViewController {
         
         present(alert, animated: false, completion: nil)
     }
+    
+    
     
 }
 
