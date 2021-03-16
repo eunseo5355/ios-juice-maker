@@ -26,22 +26,33 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        UpdateStock()
+        updateStock()
     }
-    
-//    func orderProcessOfJuice() {
-//
-//    }
-    
-    func UpdateStock() {
+
+    func updateStock() {
         strawberryStock.text = String(juiceMaker.fruitInformation[.strawberry]!.stock)
         bananaStock.text = String(juiceMaker.fruitInformation[.banana]!.stock)
         pineappleStock.text = String(juiceMaker.fruitInformation[.pineapple]!.stock)
         kiwiStock.text = String(juiceMaker.fruitInformation[.kiwi]!.stock)
         mangoStock.text = String(juiceMaker.fruitInformation[.mango]!.stock)
     }
+    
+    func chagneScreenToStockManagerViewController() {
+        guard  let vcName = self.storyboard?.instantiateViewController(withIdentifier: "StockManagerViewController") as? StockManagerViewController else {
+            fatalError()
+        }
+        self.present(vcName, animated: true, completion: nil)
+    }
 
+    func processAlert(clickedJuiceName: JuiceTypes) {
+        if juiceMaker.didMakeJuice(of: clickedJuiceName) {
+            showAlertIfSuccessOrder(of: clickedJuiceName)
+            updateStock()
+        } else {
+            showAlertIfFailOrder(of: clickedJuiceName)
+        }
+    }
+    
     func showAlertIfSuccessOrder(of JuiceName: JuiceTypes) {
         let alert = UIAlertController(title: "주문 성공", message: "\(JuiceName) 나왔습니다! 맛있게 드세요!", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -53,7 +64,8 @@ class ViewController: UIViewController {
     
     func showAlertIfFailOrder(of JuiceName: JuiceTypes) {
         let alert = UIAlertController(title: "주문 실패", message: "재료가 모자라요. 재고를 수정할까요?", preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "예", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "예", style: .default) { (actions) in
+            self.chagneScreenToStockManagerViewController() }
         let noAction = UIAlertAction(title: "아니오", style: .destructive, handler: nil)
         
         alert.addAction(okAction)
@@ -61,72 +73,34 @@ class ViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
-    func processAlert(clickedJuiceName: JuiceTypes) {
-        if juiceMaker.didMakeJuice(of: clickedJuiceName) {
-            showAlertIfSuccessOrder(of: clickedJuiceName)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: clickedJuiceName)
-        }
-    }
-
+    
     @IBAction func strawberryJuiceOrderButton(_ sender: Any) {
         processAlert(clickedJuiceName: .strawberryJuice)
     }
 
     @IBAction func BananaJuiceOrderButton(_ sender: Any) {
-        if juiceMaker.didMakeJuice(of: .bananaJuice) == true {
-            showAlertIfSuccessOrder(of: .bananaJuice)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: .bananaJuice)
-        }
+        processAlert(clickedJuiceName: .bananaJuice)
     }
     
-    @IBAction func pineAppleJuiceOrderButton(_ sender: Any) {
-        if juiceMaker.didMakeJuice(of: .pineappleJuice) == true {
-            showAlertIfSuccessOrder(of: .pineappleJuice)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: .pineappleJuice)
-        }
+    @IBAction func pineappleJuiceOrderButton(_ sender: Any) {
+        processAlert(clickedJuiceName: .pineappleJuice)
     }
     
     @IBAction func kiwiJuiceOrderButton(_ sender: Any) {
-        if juiceMaker.didMakeJuice(of: .kiwiJuice) == true {
-            showAlertIfSuccessOrder(of: .kiwiJuice)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: .kiwiJuice)
-        }
+        processAlert(clickedJuiceName: .kiwiJuice)
     }
     
     @IBAction func mangoJuiceOrderButton(_ sender: Any) {
-        if juiceMaker.didMakeJuice(of: .mangoJuice) == true {
-            showAlertIfSuccessOrder(of: .mangoJuice)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: .mangoJuice)
-        }
+        processAlert(clickedJuiceName: .mangoJuice)
     }
     
     @IBAction func strawberryBananaJuiceOrderButton(_ sender: Any) {
-        if juiceMaker.didMakeJuice(of: .strawberryBananaJuice) == true {
-            showAlertIfSuccessOrder(of: .strawberryBananaJuice)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: .strawberryBananaJuice)
-        }
+        processAlert(clickedJuiceName: .strawberryBananaJuice)
     }
     
     @IBAction func mangoKiwiJuiceOrderButton(_ sender: Any) {
-        if juiceMaker.didMakeJuice(of: .mangoKiwiJuice) == true {
-            showAlertIfSuccessOrder(of: .mangoKiwiJuice)
-            UpdateStock()
-        } else {
-            showAlertIfFailOrder(of: .mangoKiwiJuice)
-        }
+        processAlert(clickedJuiceName: .mangoKiwiJuice)
     }
+    
 }
 
