@@ -28,9 +28,14 @@ class ViewController: UIViewController {
     }
 
     func updateStock(orderdJuice: JuiceTypes) {
+        
         switch orderdJuice {
         case .strawberryJuice:
-            strawberryStock.text = String(juiceMaker.fruitInformation[.strawberry]!.stock)
+            if let fruit = juiceMaker.fruitInformation[.strawberry] {
+                strawberryStock.text = String(fruit.stock)
+            } else {
+                fatalError()
+            }
         case .bananaJuice:
             bananaStock.text = String(juiceMaker.fruitInformation[.banana]!.stock)
         case .pineappleJuice:
@@ -38,18 +43,23 @@ class ViewController: UIViewController {
         case .kiwiJuice:
             kiwiStock.text = String(juiceMaker.fruitInformation[.kiwi]!.stock)
         case .strawberryBananaJuice:
-            strawberryStock.text = String(juiceMaker.fruitInformation[.strawberry]!.stock)
-            bananaStock.text = String(juiceMaker.fruitInformation[.banana]!.stock)
+            if let fruit = juiceMaker.fruitInformation[.strawberry],
+               let fruit2 = juiceMaker.fruitInformation[.banana] {
+                strawberryStock.text = String(fruit.stock)
+                bananaStock.text = String(fruit2.stock)
+            } else {
+                fatalError()
+            }
         case .mangoKiwiJuice:
             kiwiStock.text = String(juiceMaker.fruitInformation[.kiwi]!.stock)
             mangoStock.text = String(juiceMaker.fruitInformation[.mango]!.stock)
-        default:
-            print("재고 error")
+        case .mangoJuice:
+            mangoStock.text = String(juiceMaker.fruitInformation[.mango]!.stock)
         }
     }
     
-    func chagneScreenToStockManagerViewController() {
-        guard  let vcName = self.storyboard?.instantiateViewController(withIdentifier: "StockManagerViewController") as? StockManagerViewController else {
+    func changeScreenToStockManagerViewController() {
+        guard let vcName = self.storyboard?.instantiateViewController(withIdentifier: "StockManagerViewController") as? StockManagerViewController else {
             fatalError()
         }
         self.present(vcName, animated: true, completion: nil)
@@ -76,7 +86,7 @@ class ViewController: UIViewController {
     func showAlertIfFailOrder(of JuiceName: JuiceTypes) {
         let alert = UIAlertController(title: "주문 실패", message: "재료가 모자라요. 재고를 수정할까요?", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "예", style: .default) { (actions) in
-            self.chagneScreenToStockManagerViewController() }
+            self.changeScreenToStockManagerViewController() }
         let noAction = UIAlertAction(title: "아니오", style: .destructive, handler: nil)
         
         alert.addAction(okAction)
@@ -112,6 +122,5 @@ class ViewController: UIViewController {
     @IBAction func mangoKiwiJuiceOrderButton(_ sender: Any) {
         processAlert(orderedJuiceName: .mangoKiwiJuice)
     }
-    
 }
 
