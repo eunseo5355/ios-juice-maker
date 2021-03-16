@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var strawberryStock: UILabel!
     @IBOutlet weak var bananaStock: UILabel!
     @IBOutlet weak var pineappleStock: UILabel!
@@ -26,15 +25,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateStock()
     }
 
-    func updateStock() {
-        strawberryStock.text = String(juiceMaker.fruitInformation[.strawberry]!.stock)
-        bananaStock.text = String(juiceMaker.fruitInformation[.banana]!.stock)
-        pineappleStock.text = String(juiceMaker.fruitInformation[.pineapple]!.stock)
-        kiwiStock.text = String(juiceMaker.fruitInformation[.kiwi]!.stock)
-        mangoStock.text = String(juiceMaker.fruitInformation[.mango]!.stock)
+    func updateStock(orderdJuice: JuiceTypes) {
+        switch orderdJuice {
+        case .strawberryJuice:
+            strawberryStock.text = String(juiceMaker.fruitInformation[.strawberry]!.stock)
+        case .bananaJuice:
+            bananaStock.text = String(juiceMaker.fruitInformation[.banana]!.stock)
+        case .pineappleJuice:
+            pineappleStock.text = String(juiceMaker.fruitInformation[.pineapple]!.stock)
+        case .kiwiJuice:
+            kiwiStock.text = String(juiceMaker.fruitInformation[.kiwi]!.stock)
+        case .strawberryBananaJuice:
+            strawberryStock.text = String(juiceMaker.fruitInformation[.strawberry]!.stock)
+            bananaStock.text = String(juiceMaker.fruitInformation[.banana]!.stock)
+        case .mangoKiwiJuice:
+            kiwiStock.text = String(juiceMaker.fruitInformation[.kiwi]!.stock)
+            mangoStock.text = String(juiceMaker.fruitInformation[.mango]!.stock)
+        default:
+            print("재고 error")
+        }
     }
     
     func chagneScreenToStockManagerViewController() {
@@ -44,12 +55,12 @@ class ViewController: UIViewController {
         self.present(vcName, animated: true, completion: nil)
     }
 
-    func processAlert(clickedJuiceName: JuiceTypes) {
-        if juiceMaker.didMakeJuice(of: clickedJuiceName) {
-            showAlertIfSuccessOrder(of: clickedJuiceName)
-            updateStock()
+    func processAlert(orderedJuiceName: JuiceTypes) {
+        if juiceMaker.didMakeJuice(of: orderedJuiceName) {
+            showAlertIfSuccessOrder(of: orderedJuiceName)
+            updateStock(orderdJuice: orderedJuiceName)
         } else {
-            showAlertIfFailOrder(of: clickedJuiceName)
+            showAlertIfFailOrder(of: orderedJuiceName)
         }
     }
     
@@ -75,31 +86,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func strawberryJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .strawberryJuice)
+        processAlert(orderedJuiceName: .strawberryJuice)
     }
 
     @IBAction func BananaJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .bananaJuice)
+        processAlert(orderedJuiceName: .bananaJuice)
     }
     
     @IBAction func pineappleJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .pineappleJuice)
+        processAlert(orderedJuiceName: .pineappleJuice)
     }
     
     @IBAction func kiwiJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .kiwiJuice)
+        processAlert(orderedJuiceName: .kiwiJuice)
     }
     
     @IBAction func mangoJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .mangoJuice)
+        processAlert(orderedJuiceName: .mangoJuice)
     }
     
     @IBAction func strawberryBananaJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .strawberryBananaJuice)
+        processAlert(orderedJuiceName: .strawberryBananaJuice)
     }
     
     @IBAction func mangoKiwiJuiceOrderButton(_ sender: Any) {
-        processAlert(clickedJuiceName: .mangoKiwiJuice)
+        processAlert(orderedJuiceName: .mangoKiwiJuice)
     }
     
 }
