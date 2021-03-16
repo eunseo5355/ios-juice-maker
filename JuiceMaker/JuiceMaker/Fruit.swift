@@ -14,7 +14,7 @@ class FruitStock {
     private var fruit: FruitTypes
     private(set) var stock = 10
 
-    init(_ fruit: FruitTypes, _ stock: Int) {
+    init(fruit: FruitTypes, stock: Int) {
         self.fruit = fruit
         self.stock = stock
     }
