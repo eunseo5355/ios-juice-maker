@@ -7,8 +7,8 @@
 
 import UIKit
 
-class StockMangerViewController: UIViewController {
-
+class StockManagerViewController: UIViewController {
+    
     @IBOutlet weak var testNumber: UILabel!
     var Number = 0
 
