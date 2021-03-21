@@ -57,7 +57,7 @@ final class JuiceMakerViewController: UIViewController {
         }
     }
     
-    func initializeFruitStock() {
+    private func initializeFruitStock() {
         strawberryStockLabel.text = FruitStorage.shared.stockCount(of: .strawberry)
         bananaStockLabel.text = FruitStorage.shared.stockCount(of: .banana)
         pineappleStockLabel.text = FruitStorage.shared.stockCount(of: .pineapple)
