@@ -18,7 +18,7 @@ final class FruitStock {
     }
 }
 
-class FruitStorage {
+final class FruitStorage {
     static let shared = FruitStorage()
     
     private(set) var fruitInformation = FruitStock([
