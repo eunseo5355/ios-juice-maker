@@ -462,6 +462,7 @@
                     <navigationItem key="navigationItem" id="RDx-rO-Xdy"/>
                     <connections>
                         <outlet property="closeButton" destination="XZo-rw-dfU" id="4f5-zb-VhB"/>
+                        <outlet property="strawberryStepper" destination="z0L-Oi-zFi" id="5bg-Lp-chM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ara-Om-Dg9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -21,16 +21,20 @@ final class JuiceMakerViewController: UIViewController {
     @IBOutlet private weak var strawberryBananaJuiceOrderButton: UIButton!
     @IBOutlet private weak var mangoKiwiJuiceOrderButton: UIButton!
     
-    private let juiceMaker = JuiceMaker.shared
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeFruitStock()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateFruitStock(_:)), name: Notification.Name("didStockChanged"), object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        initializeFruitStock()
+    }
+
     private func makeOrderedJuice(menu: JuiceTypes) {
-        if juiceMaker.didMakeJuice(of: menu) {
+        if JuiceMaker().didMakeJuice(of: menu) {
             showOrderSuccessAlert(menu: menu)
         } else {
             showOrderFailAlert()
@@ -41,16 +45,24 @@ final class JuiceMakerViewController: UIViewController {
         guard let fruit = notification.object as? FruitTypes else { return }
         switch fruit {
         case .strawberry:
-            strawberryStockLabel.text = juiceMaker.fruitStockCount(of: .strawberry)
+            strawberryStockLabel.text = FruitStorage.shared.stockCount(of: .strawberry)
         case .banana:
-            bananaStockLabel.text = juiceMaker.fruitStockCount(of: .banana)
+            bananaStockLabel.text = FruitStorage.shared.stockCount(of: .banana)
         case .kiwi:
-            kiwiStockLabel.text = juiceMaker.fruitStockCount(of: .kiwi)
+            kiwiStockLabel.text = FruitStorage.shared.stockCount(of: .kiwi)
         case .mango:
-            mangoStockLabel.text = juiceMaker.fruitStockCount(of: .mango)
+            mangoStockLabel.text = FruitStorage.shared.stockCount(of: .mango)
         case .pineapple:
-            pineappleStockLabel.text = juiceMaker.fruitStockCount(of: .pineapple)
+            pineappleStockLabel.text = FruitStorage.shared.stockCount(of: .pineapple)
         }
+    }
+    
+    func initializeFruitStock() {
+        strawberryStockLabel.text = FruitStorage.shared.stockCount(of: .strawberry)
+        bananaStockLabel.text = FruitStorage.shared.stockCount(of: .banana)
+        pineappleStockLabel.text = FruitStorage.shared.stockCount(of: .pineapple)
+        kiwiStockLabel.text = FruitStorage.shared.stockCount(of: .kiwi)
+        mangoStockLabel.text = FruitStorage.shared.stockCount(of: .mango)
     }
 
     private func showOrderSuccessAlert(menu: JuiceTypes) {
@@ -96,7 +108,7 @@ final class JuiceMakerViewController: UIViewController {
             makeOrderedJuice(menu: .mangoKiwiJuice)
         case strawberryBananaJuiceOrderButton:
             makeOrderedJuice(menu: .strawberryBananaJuice)
-        default: 
+        default:
             return
         }
     }

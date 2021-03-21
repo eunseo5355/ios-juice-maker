@@ -6,27 +6,12 @@
 import Foundation
 
 struct JuiceMaker {
-    static let shared = JuiceMaker()
-    
-    var fruitInformation: [FruitTypes: FruitStock] = [
-        .strawberry: FruitStock(.strawberry),
-        .banana: FruitStock(.banana),
-        .kiwi: FruitStock(.kiwi),
-        .mango: FruitStock(.mango),
-        .pineapple: FruitStock(.pineapple)
-    ]
-    
     func didMakeJuice(of orderedMenu: JuiceTypes) -> Bool {
         for (fruitType, requiredAmount) in orderedMenu.recipe() {
-            if let fruit = fruitInformation[fruitType], fruit.isStockExist(requiredAmount) {
-                    fruit.subtractStock(requiredAmount)
+            if FruitStorage.shared.isStockExist(fruitType, requiredAmount) {
+                FruitStorage.shared.subtractStock(fruitType, requiredAmount)
                 } else { return false }
             }
         return true
-    }
-    
-    func fruitStockCount(of fruit: FruitTypes) -> String? {
-        guard let fruitStock = fruitInformation[fruit] else { return nil }
-        return String(fruitStock.stock)
     }
 }
